@@ -15,7 +15,6 @@ service UserService {
 }
 
 enum UserRole {
-  USER_ROLE_UNSPECIFIED = 0;
   USER_ROLE_GUEST = 1;
   USER_ROLE_ADMIN = 2;
 }
