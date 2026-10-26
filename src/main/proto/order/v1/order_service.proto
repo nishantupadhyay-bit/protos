@@ -16,9 +16,9 @@ service OrderService {
 }
 
 enum OrderStatus {
-  ORDER_STATUS_PENDING = 1;
-  ORDER_STATUS_CONFIRMED = 2;
-  ORDER_STATUS_CANCELLED = 3;
+  ORDER_STATUS_PENDING = 0;
+  ORDER_STATUS_CONFIRMED = 1;
+  ORDER_STATUS_CANCELLED = 2;
 }
 
 message CreateOrderRequest {
