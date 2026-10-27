@@ -1,0 +1,57 @@
+plugins {
+    id 'java-library'
+    id 'com.google.protobuf' version '0.9.5'
+    id 'maven-publish'
+}
+
+group = 'com.assignment'
+version = '0.1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+def grpcVersion = '1.73.0'
+def protobufVersion = '4.31.1'
+
+dependencies {
+    api "com.google.protobuf:protobuf-java:${protobufVersion}"
+    api "io.grpc:grpc-protobuf:${grpcVersion}"
+    api "io.grpc:grpc-stub:${grpcVersion}"
+    api 'javax.annotation:javax.annotation-api:1.3.2'
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${protobufVersion}"
+    }
+
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+        }
+    }
+
+    generateProtoTasks {
+        all().each { task ->
+            task.plugins {
+                grpc {}
+            }
+        }
+    }
+}
+
+publishing {
+    publications {
+        protoLibrary(MavenPublication) {
+            from components.java
+            artifactId = 'assignment4-protos'
+        }
+    }
+}
